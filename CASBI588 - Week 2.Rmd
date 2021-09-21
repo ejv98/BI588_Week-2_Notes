@@ -1,0 +1,174 @@
+---
+title: "CASBI588-Week 2"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+#Matrices and Arrays
+
+<!-- A matrix is like a collection of vectors stored together, and like vectors, matrices can only store data of one class (e.g. numerical or character). Matrices are created using the matrix() function. -->
+
+```{r}
+m<-matrix(data=c(1,2,3,4),nrow=2,ncol=2)
+m
+#      [,1] [,2]
+# [1,]    1    3
+# [2,]    2    4
+```
+
+<!-- Matrices are filled column-wise, with the argument, byrow, set to FALSE. This is by default. You can undo this argument by setting byrow=TRUE.  -->
+
+```{r}
+m<-matrix(data=c(1,2,3,4,5,6),nrow=2,ncol=3,byrow=FALSE)
+m
+#      [,1] [,2] [,3]
+# [1,]    1    3    5
+# [2,]    2    4    6
+
+m<-matrix(data=c(1,2,3,4,5,6),nrow=2,ncol=3,byrow=TRUE)
+m
+#      [,1] [,2] [,3]
+# [1,]    1    2    3
+# [2,]    4    5    6
+```
+
+<!-- You can create matrices in R by binding vectors of the same length together either row-wise (with the function rbind()) or column-wise (with the function cbind()) -->
+
+```{r}
+v1<-1:4
+v2<-6:9
+v1
+[1] 1 2 3 4
+v2
+[1] 6 7 8 9
+m1<-rbind(v1,v2)
+m1
+<!--    [,1] [,2] [,3] [,4] -->
+<!-- v1    1    2    3    4 -->
+<!-- v2    6    7    8    9 -->
+
+m2<-cbind(v1,v2)
+m2
+<!--      v1 v2 -->
+<!-- [1,]  1  6 -->
+<!-- [2,]  2  7 -->
+<!-- [3,]  3  8 -->
+<!-- [4,]  4  9 -->
+```
+
+<!-- Metadata about a matrix can be extracted using the class(), dim(), names(), rownames(), colnames(), and other commands. The dim() command returns a vector containing the number of rows at index position 1 and the number of columns at index position 2.  -->
+
+```{r}
+class(m1)
+# [1] "matrix" "array" 
+dim(m1)
+# [1] 2 4
+class(m2)
+# [1] "matrix" "array" 
+dim(m2)
+# [1] 4 2
+colnames(m2)
+# [1] "v1" "v2"
+rownames(m2)
+# NULL
+
+# rownames are not defined here ("NULL"), since cbind() was used to create the matrix. 
+```
+
+<!-- The structure (str()) command can be applied to any data structure to provide details about that object. -->
+
+```{r}
+str(m2)
+ # int [1:4, 1:2] 1 2 3 4 6 7 8 9
+ # - attr(*, "dimnames")=List of 2
+ #  ..$ : NULL
+ #  ..$ : chr [1:2] "v1" "v2"
+```
+
+<!-- An array is a more general data structure, of which a vector (with 1 implicit dimension) and a matrix (with 2 defined dimensions) are but exampels. Arrays can include additional dimensions, but (like vectors and matrices) they can only include elements that are all of the same atomic data class (e.g. numeric, character).  -->
+
+#Construction of a 3D array with 5 rows, 6 columns, and 3 levels
+
+```{r}
+a<-array(data=1:90,dim=c(5,6,3))
+a
+
+# , , 1
+# 
+#      [,1] [,2] [,3] [,4] [,5] [,6]
+# [1,]    1    6   11   16   21   26
+# [2,]    2    7   12   17   22   27
+# [3,]    3    8   13   18   23   28
+# [4,]    4    9   14   19   24   29
+# [5,]    5   10   15   20   25   30
+# 
+# , , 2
+# 
+#      [,1] [,2] [,3] [,4] [,5] [,6]
+# [1,]   31   36   41   46   51   56
+# [2,]   32   37   42   47   52   57
+# [3,]   33   38   43   48   53   58
+# [4,]   34   39   44   49   54   59
+# [5,]   35   40   45   50   55   60
+# 
+# , , 3
+# 
+#      [,1] [,2] [,3] [,4] [,5] [,6]
+# [1,]   61   66   71   76   81   86
+# [2,]   62   67   72   77   82   87
+# [3,]   63   68   73   78   83   88
+# [4,]   64   69   74   79   84   89
+# [5,]   65   70   75   80   85   90
+```
+
+#Subsetting
+
+<!-- You can select elements from vectors, matrices, and arrays by subsetting them using their index position(s) in bracket notation. For vectors, you would specify an index value in one dimension. For matrices, you would give the index values in two dimensions. For arrays, generally, you would give index values for each dimension in the array.  -->
+
+```{r}
+v<-1:100
+v
+# This creates a vector containing all of the integers from 1 to 100
+v[1:15]
+# [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15
+# This selects the first 15 elements of the vector
+
+v[c(2,4,6,8,10)]
+v
+# [1]  2  4  6  8 10
+# This is demonstrating that you can give a vector of index values to use to subset. 
+
+v<-101:200
+v[seq(from=1,to=100,by=2)]
+v
+#[1] 101 103 105 107 109 111 113 115 117 119 121 123 125 127 129 131 133 135 137
+# [20] 139 141 143 145 147 149 151 153 155 157 159 161 163 165 167 169 171 173 175
+# [39] 177 179 181 183 185 187 189 191 193 195 197 199
+
+# This demonstrates that you can also use a fucntion or a calculation to subset a vector. 
+
+```
+
