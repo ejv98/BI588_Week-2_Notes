@@ -172,3 +172,52 @@ v
 
 ```
 
+#Challenge 1
+
+```{r}
+v<-c("Stately","plump","Buck","Mulligan","came","from","the","stairhead",",","bearing","a","bowl","of","lather","on","which","a","mirror","and","a","razor","lay","crossed")
+
+<!-- Indexing the sequence to extract every third element of the vector:  -->
+
+x<-v[seq(1,length(v),3)]
+x
+<!-- [1] "Stately"  "Mulligan" "the"      "bearing"  "of"       -->
+<!-- [6] "which"    "and"      "lay"      -->
+```
+
+#Challenge 2
+
+```{r}
+m<-matrix(data=1:80,nrow=8,ncol=10,byrow=FALSE)
+m
+
+# Extracting the 2nd, 3rd, and 6th columns and assigning them to the variable x:
+
+x<-m[,c(2,3,6)]
+x
+
+# Extracting the 6th to the 8th row and assigning them to variable x:
+#   
+x<-m[c(6,7,8),]
+x
+
+# Extracting elements from row 2 column 2, to row 6 column 9:
+  
+x<-m[2:6,2:9]
+x
+```
+
+#Challenge 3
+
+```{r}
+# Constructing a 4-dimensional, 400 element array (5x5x4x4) named a, descending from 400 to 1:
+  
+a<-array(data=40:1,dim=c(5,5,4,4))
+a
+```
+
+#Overwriting
+
+You can replace elements in a vector or matrix, or, entire rows or columns, by identifying the elements to be replaced and then assigning them new values. 
+
+#Example:
